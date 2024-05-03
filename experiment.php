@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    
+    <!-- <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  />
+    <link type="text/css" rel="stylesheet" href="css/main.css" /> -->
+    
+
+
+    <script src="https://kit.fontawesome.com/6b32a7d243.js" crossorigin="anonymous"></script>
+    <!-- update existing v5 CSS to use v6 icons and assets -->
+    
+    <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="Icon" href="img/logo school project.jpg">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet"  href="css/main.css" type="text/css">
+        <script defer src="js/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <link href="css/css/all.css" rel="stylesheet" />
+    <title>Nutri Plan</title>
+</head>
+
+
+
+
+
+<body class="  green ">
+<nav style="background-color: white;" class="navbar navbar-expand-md   ">
+    <div class="container-fluid">
+        
+        <a href="#!" class="navbar-brand">
+            <img src="img/logo school project.jpg" width="24" height="30" alt="" class="d-inline-block align-text-top">
+            Nutri Plan</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse justify-content-end navbar-collapse" id="navbarNav">
+
+               
+
+                </ul>
+
+            </div>
+        
+        
+        
+    </div>
+</nav>
+
+<section>
+    <br><br><br>
+    <div class="row">
+        <div class="col">
+            <div class="card ">
+                <div class="card-body">
+                <div class="container">
+
+                <button type="button" class="btn white-text btn-green" data-bs-toggle="modal" data-bs-target="#addForm" style="">Add</button>
+
+
+                <?php
+                
+                include("connect.php");
+
+                $query="SELECT * FROM testingdb";
+                $query_run=mysqli_query($connection, $query);
+
+?>
+           
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">FULL NAME</th>
+                            <th scope="col">EMAIL</th>
+                            <th scope="col">PASSWORD</th>
+                            <th scope="col">GENDER</th>
+                            <th scope="col">AGE</th>
+                            <th scope="col">ACTION</th>
+                            
+                        </tr>
+                    </thead>
+
+                    
+                <?php
+                
+                
+                if($query_run){
+                    foreach($query_run as $row){
+                        ?>
+                        <tbody>
+                        <tr>
+                            <td> <?php echo $row['ID'];          ?></td>
+                            <td> <?php echo $row['fullName'];    ?></td>
+                            <td> <?php echo $row['email'];       ?></td>
+                            <td> <?php echo $row['pass'];    ?></td>
+                            <td> <?php echo $row['gender'];      ?></td>
+                            <td> <?php echo $row['age'];         ?></td>
+                            <td> <button type="button" class="viewForm white-text btn btn-green">View</button>  <button type="button" class="btn editForm  btn-primary"  >Edit</button> 
+                            <button class="btn deletebtn btn-danger">Delete</button>
+                        
+                        </td>
+                        </tr>
+                    </tbody>
+
+                       
+                        <?php
+                    }
+                } 
+                
+                else{
+                    echo"No record found";
+                }
+                ?>
+                
+                
+            
+
+
+
+
+                    
+                </table>
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- add modal form -->
+    <div class="modal fade" id="addForm" tabindex="1" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"> <h3>Add form</h3>
+                <div class="container">
+                   <form action="insert.php" method="POST">
+                   <div class="row"><div class="col ">
+
+                   <div class="form-group floating-label">
+                      
+                     
+                    </div>
+                   <div class="form-group floating-label"> 
+                
+                   <input type="text" name="fullName" id="fullName" class="form-control"><label for="fullName">Full Name</label></input></div>
+
+           <div class="form-group floating-label"><input class="form-control" type="email" name="email" id="email"><label for="">Email</label>  </input></div></div>
+
+           <div class="form-group floating-label"><input class="form-control" type="password" name="password" id="password"><label for="">Password</label></input></div></div>
+                  
+           <div class="form-group "><label for="">Gender:</label>
+            <input type="radio" name="gender" id="male" class="form-input-label" value="male">
+            <label for="male">Male</label>
+
+            <input type="radio" name="gender" id="female" class="form-input-label" value="female">
+            <label for="female">Female</label>
+        
+        </div>
+
+        <div class="form-group floating-label"><input type="number" name="age" id="age" class="form-control"> <label for="age">Age</label></div>
+       
+    
+   <div class="modal-footer">
+   <button type="submit" name="submit" class="btn btn-green white-text ">Add</button>
+   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+   </div>
+    </div>
+                   </div>
+                   </form></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- edit modal form edit -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+           
+                <div class="modal-header"><h3>Edit form</h3>
+                   <form action="update.php" method="post">
+                   <input type="hidden" name="id" id="update_id" >
+                   <div class="row"><div class="col">
+
+                    <div class="form-group floating-label">
+                      
+                     
+                    </div>
+
+                   <div class="form-group floating-label"> 
+                
+                   <input type="text" name="fullName" id="editfullName" class="form-control">
+                   <label for="fullName">Full Name</label></input></div>
+
+           <div class="form-group floating-label">
+            <input class="form-control" type="email" name="email" id="editemail">
+            <label for="">Email</label>  </input></div></div>
+
+           <div class="form-group floating-label"><input class="form-control" type="password" name="password" id="editpassword"><label for="">Password</label></input></div></div>
+                  
+           <div class="form-group "><label for="">Gender:</label>
+            <input type="radio" name="gender" id="editgenderMale" class="form-input-label" value="male">
+            <label for="male">Male</label>
+
+            <input type="radio" name="gender" id="editgenderFemale" class="form-input-label" value="female">
+            <label for="female">Female</label>
+        
+        </div>
+
+        <div class="form-group floating-label"><input type="text" name="age" id="editage" class="form-control"> <label for="age">Age</label></div>
+       
+    
+   <div class="modal-footer">
+   <button type="submit" name="update" class="btn btn-green white-text ">update</button>
+   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+   </div>
+    </div>
+                   </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- delete modal -->
+
+    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+           
+                <div class="modal-header">
+                   <form action="delete.php" method="post">
+                   <input type="hidden" name="delete_id" id="delete_id" >
+                   <div class="row"><div class="col">
+                    <h4> Delete this data?</h4>
+                   
+    
+   <div class="modal-footer">
+   <button type="submit" name="delete" class="btn btn-danger white-text ">Yes</button>
+   <button type="button" class="btn btn-green" data-dismiss="modal">No</button>
+   </div>
+    </div>
+                   </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+<!-- view modal -->
+
+<div class="modal fade" id="viewmodal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+           
+                <div class="modal-header">
+                   <div class="modal-body">
+                    <div class="form-group">
+                    <label for="">ID: </label>
+                    <span id="viewID"></span>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="">Full Name: </label>
+                    <span id="viewfullName"></span>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="">Email: </label>
+                    <span id="viewemail"></span>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="">Password: </label>
+                    <span id="viewpassword"></span>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="">Gender: </label>
+                    <span id="viewgender"></span>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="">Age: </label>
+                    <span id="viewage"></span>
+                    </div>
+
+                   </div>
+                   
+   </div>
+    
+   <div class="modal-footer">
+  
+   <button type="button" class="btn btn-green white-text" data-dismiss="modal">Exit</button>
+
+
+
+
+    </div>
+                  
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <!-- <script type="text/javascript " src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="js/jquery.js"></script>
+    <script src="js/jq.js"></script>
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js "></script>
+    <!-- <script type="text/javascript" src="css/js/bootstrap.js"></script> -->
+   
+    
+
+
+    <script>
+
+
+        $(document).ready(function(){
+        
+            $('.deletebtn').on('click', function(){
+
+$('#deletemodal').modal('show');
+
+$tr = $(this).closest('tr');
+
+                    var data = $tr.find("td").map(function(){
+                        return $(this).text();
+                    }).get();
+                    console.log(data);
+                    $('#delete_id').val(data[0]);
+ 
+
+
+
+
+});
+
+
+$('.viewForm').on('click', function(){
+
+$('#viewmodal').modal('show');
+
+ $tr = $(this).closest('tr');
+
+var data = $tr.find("td").map(function(){
+    return $(this).text();
+}).get();
+console.log(data);
+$('#viewID').text(data[0]);
+$('#viewfullName').text(data[1]);
+$('#viewemail').text(data[2]);
+$('#viewpassword').text(data[3]);
+$('#viewgender').text(data[4]);
+$('#viewage').text(data[5]);
+
+
+
+
+});
+
+
+
+             
+            $('.editForm').on('click', function(){
+
+                    $('#editmodal').modal('show');
+                    
+                     $tr = $(this).closest('tr');
+
+                    var data = $tr.find("td").map(function(){
+                        return $(this).text();
+                    }).get();
+                    console.log(data);
+                    $('#update_id').val(data[0]);
+                    $('#editfullName').val(data[1]);
+                    $('#editemail').val(data[2]);
+                    $('#editpassword').val(data[3]);
+                 
+                    $('#editage').val(data[5]);
+                   if(data[4]==='male'){
+                    $('#editgenderMale').prop('checked',true);
+                   }else if(data[4]==='female'){
+                    $('#editgenderFemale').prop('checked',true);
+                   }
+                  
+
+
+                });
+        });
+    </script>
+  
+</body>
+
+</html>

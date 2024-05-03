@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="style.css">
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+</head>
+
+
+
+
+
+<body class="grey darken-4  ">
+<br><br><br><br><br>
+<div class="row">
+    <div class="col l6 offset-l3">
+        <div class="card" style="border-radius: 10%;">
+            <div class="container">
+                <br><br><br>
+                <div class="">
+                    <button id="showLogin" class="btn green">Login</button>
+                    <button id="showRegister" class="btn green">Register</button>
+                    <form id="loginForm" action="connect.php" method="get" style="display: block;">
+                        <!-- Login form fields -->
+                        <h3 class="black-text center">Login</h3>
+
+
+                        <input type="email" name="Email"  placeholder="Email">
+                        <label for="email">Email</label>
+                        <input type="password" name="password" placeholder="Password">
+                        <label for="password">Password</label>
+
+                    <br><br>
+                        <button type="submit" class="btn blue">Login</button>
+                        <a href="#!" id="showFP" class="blue-text">Forgot Password?</a>
+                    </form>
+                    <form id="registerForm" action="connect.php" method="post" style="display: none;">
+                        <!-- Register form fields -->
+
+                        <h3 class="black-text center">Register</h3>
+                        <input type="text" placeholder="Full Name" id="fullName" name="fullName" required>
+                        <label for="fullName">Full Name</label>
+                        <input type="email" placeholder="Email" id="email" name="email" required>
+                        <label for="email">Email</label>
+                        <input type="password" id="passwordSign" name="password" placeholder="Password" required>
+                        <label for="passwordSign">Password</label>
+                        <input type="password" id="passwordConfirm" name="passwordConfirm"  placeholder="Confirm Password" required>
+                        <label for="passwordConfirm">Confirm Password</label>
+                        <span id="passMatch"></span>
+                        <br><br><br><br>
+                        <input type="checkbox" name="showPassword" id="showPass"  >
+                        <label for="showPass">Show Password</label>
+
+                        
+                        <br><br><br>
+                        <button type="submit" id="registerbtn" class="btn blue">Register</button>
+                    </form>
+                    <form action="connect.php" method="get" id="FPform" style="display: none;">
+                        <h3 class="black-text center">Forgot Password</h3>
+
+
+                        <input type="email" name="email" placeholder="Email" id="email" required>
+                        <input type="text" name="otp" id="otp" placeholder="OTP" required>
+                        <button type="submit" id="verifybtn" class="btn blue" >Verify</button>
+
+
+
+                    </form>
+                </div>
+                <br><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript " src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+    <script type="text/javascript " src="js/materialize.min.js "></script>
+    
+
+
+    <script>
+        document.getElementById('showLogin').addEventListener('click', function() {
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('FPform').style.display = 'none';
+
+});
+
+document.getElementById('showRegister').addEventListener('click', function() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'block';
+    document.getElementById('FPform').style.display = 'none';
+});
+
+document.getElementById('showFP').addEventListener('click', function() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('registerForm').style.display = 'none';
+    document.getElementById('FPform').style.display = 'block';
+    
+});
+       
+
+const  showpasschecker= document.getElementById('showPass');
+
+const passfield=document.getElementById('passwordSign');
+const passConfirmfield=document.getElementById('passwordConfirm');
+
+showpasschecker.addEventListener('change', function(){
+
+    if(showpasschecker.checked){
+        passfield.type='text';
+        passConfirmfield.type='text';
+
+    }else{
+        passfield.type='password';
+        passConfirmfield.type='password';
+    }
+});
+
+        $(window).scroll(function() {
+            
+        })
+
+
+        function checkForm(){
+            const form=document.getElementById('Signup');
+            const inputs=form.querySelectorAll("input[required]");
+            let allFilled=true;
+
+            inputs.forEach(function(input){
+
+
+                if(input.value===""){
+                    allFilled=false;
+                }
+            });
+            return allFilled;
+        }
+
+        function passMatchChecker(){
+            const pass=document.getElementById('passwordSign').value;
+            const passConfirm=document.getElementById('passwordConfirm').value;
+            const passMatchConfirm=document.getElementById('passMatch');
+            const btnSignUp=document.getElementById('registerbtn');
+
+            if(pass===passConfirm && pass.length>0&&checkForm()){
+                passMatchConfirm.innerHTML=" Password Match";
+                passMatchConfirm.style.color="green"
+                btnSignUp.disabled=false;
+            } else{
+                passMatchConfirm.innerHTML=" Password do not Match";
+                passMatchConfirm.style.color="red"
+                btnSignUp.disabled=true;
+            }
+        }
+
+
+
+
+        $('.fadein').hide();
+        setTimeout(() => {
+
+            $(document).ready(function() {
+                $('.fadein').fadeIn();
+                $('.fadeout').fadeOut();
+                $('.parallax').parallax({
+                    fullWidth: true
+                });
+                // Init Sidenav
+                $('.count').each(function() {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                    }, {
+                        duration: 5000,
+                        easing: 'swing',
+                        step: function(now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+                $('select').material_select();
+
+
+                $('.button-collapse').sideNav();
+                $('.dropdown-button').dropdown({
+                    constrainWidth: false,
+                    hover: true,
+                    belowOrigin: true,
+                    alignment: 'left'
+                });
+                $('.scrollspy').scrollSpy();
+            });
+            $('.slider').slider({
+                indicators: true,
+                height: 400,
+                transition: 2000,
+                interval: 3000
+            });
+            $('.modal').modal({
+                dismissible: true,
+                inDuration: 300,
+                outDuration: 200,
+                ready: function(modal, trigger) {
+                    console.log('Modal Open', modal, trigger);
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

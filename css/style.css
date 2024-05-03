@@ -1,0 +1,37 @@
+.slider{
+  background-color: grey;
+};
+.custom-bullet {
+  list-style-type: none;
+  margin-left: 30px;
+}
+
+.custom-bullet:before {
+  content: "•"; /* You can use any other character or even an image */
+  color: #f44336; /* Customize the color */
+  margin-right: 10px;
+}
+.logo-icon{
+  height: 60px;
+  width: 40px;
+}
+.border-input{
+border-radius: 5px;
+}
+.green{
+  background-color:green;
+}
+body{
+  color: green;
+}
+.white-text{
+  color: white;
+}
+h1.white-text{
+  color: white;}
+  .card-style{
+    border-radius: 10px; height: 20rem;
+  }
+  button.btn.btn-green{
+    background-color: green;
+  }

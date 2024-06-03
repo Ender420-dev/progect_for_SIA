@@ -1,5 +1,5 @@
 body{
-  background-color: green;
+  background-color: white;
 }
 .white-text{
   color: white;
@@ -25,7 +25,7 @@ a.green-text.white{
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   background-color: white;
-  color: green;
+  color: black;
 }
 h1.white-text{
 color: white;

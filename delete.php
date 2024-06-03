@@ -9,7 +9,7 @@ if(isset($_POST['delete'])){
     $id=$_POST['delete_id'];
  
 
-  $sql="DELETE FROM testingdb WHERE ID='$id'";
+  $sql="DELETE FROM user_table WHERE user_id='$id'";
   $result=mysqli_query($connection , $sql);
 
   if($result){

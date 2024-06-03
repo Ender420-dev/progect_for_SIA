@@ -19,7 +19,7 @@
 border-radius: 5px;
 }
 .green{
-  background-color:green;
+  background-color:white;
 }
 body{
   color: green;
@@ -34,4 +34,7 @@ h1.white-text{
   }
   button.btn.btn-green{
     background-color: green;
+  }
+  .hide{
+    display: none;
   }
